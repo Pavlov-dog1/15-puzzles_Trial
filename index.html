@@ -33,6 +33,10 @@
             background-color: #ddd;
             cursor: default;
         }
+        .selected {
+            background-color: rgba(76, 175, 80, 0.7); /* 背景色を少し薄く */
+            border: 2px solid #ff9800; /* 枠線で選択を強調 */
+        }
         .control-btns {
             display: flex;
             flex-direction: column;
@@ -112,6 +116,17 @@
     // タイルを選択する関数
     function selectTile(index) {
         selectedTileIndex = index;
+
+        // すべてのタイルから 'selected' クラスを削除
+        const allTiles = document.querySelectorAll('.tile');
+        allTiles.forEach(tile => tile.classList.remove('selected'));
+
+        // 選択されたタイルに 'selected' クラスを追加
+        const selectedTile = allTiles[selectedTileIndex];
+        if (!selectedTile.classList.contains('empty')) { // 空のタイルには追加しない
+            selectedTile.classList.add('selected');
+        }
+
         updateControlButtons();
     }
 
